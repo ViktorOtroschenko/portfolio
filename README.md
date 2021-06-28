@@ -24,4 +24,3 @@
 [2]: https://github.com/ViktorOtroschenko/portfolio/tree/main/Framework_Pytorch
 [3]: https://github.com/ViktorOtroschenko/portfolio/tree/main/MySQL_base_hotel
 [4]: https://github.com/ViktorOtroschenko/portfolio/tree/main/REST_API_on_flask
-
