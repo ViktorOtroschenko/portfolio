@@ -20,8 +20,8 @@
 
 
 ---
-[1]: https
-[2]: https
-[3]: https
-[4]: https
+[1]: https://github.com/ViktorOtroschenko/portfolio/tree/main/Data_mining_hh_and_superjob
+[2]: https://github.com/ViktorOtroschenko/portfolio/tree/main/Framework_Pytorch
+[3]: https://github.com/ViktorOtroschenko/portfolio/tree/main/MySQL_base_hotel
+[4]: https://github.com/ViktorOtroschenko/portfolio/tree/main/REST_API_on_flask
 
