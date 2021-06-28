@@ -1,0 +1,114 @@
+-- CREATE DATABASE booking;
+
+-- USE booking;
+
+CREATE TABLE IF NOT EXISTS users (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  appeal VARCHAR(100) NOT NULL,
+  first_name VARCHAR(100) NOT NULL,
+  last_name VARCHAR(100) NOT NULL,
+  phone VARCHAR(120) NOT NULL UNIQUE,
+  gender CHAR(1) NOT NULL,
+  email VARCHAR(120) NOT NULL UNIQUE,
+  smoking_in_the_room BOOLEAN,
+  business_traveler BOOLEAN,
+  created_at DATETIME DEFAULT NOW(),
+  updated_at DATETIME DEFAULT NOW() ON UPDATE NOW()
+);
+
+CREATE TABLE IF NOT EXISTS public_profiles (
+  user_id INT UNSIGNED NOT NULL PRIMARY KEY,
+  alias VARCHAR(100) NOT NULL,
+  birthday DATE,
+  city VARCHAR(100),
+  country VARCHAR(100),
+  language_id INT UNSIGNED NOT NULL,
+  currency_id INT UNSIGNED NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS currency (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(150) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS languages (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(150) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS notifications (
+  user_id INT UNSIGNED NOT NULL PRIMARY KEY,
+  notification_text TEXT NOT NULL,
+  created_at DATETIME DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS credit_card (
+  user_id INT UNSIGNED NOT NULL PRIMARY KEY,
+  number_card VARCHAR(150) NOT NULL UNIQUE,
+  card_end_date DATE,
+  card_for_booking BOOLEAN,
+  charge_rewards BOOLEAN
+);
+
+CREATE TABLE IF NOT EXISTS messages (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  from_user_id INT UNSIGNED NOT NULL,
+  from_hotel_id INT UNSIGNED NOT NULL,
+  body TEXT NOT NULL,
+  is_important BOOLEAN,
+  is_delivered BOOLEAN,
+  created_at DATETIME DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS reviews (
+  user_id INT UNSIGNED NOT NULL,
+  hotel_id INT UNSIGNED NOT NULL,
+  arrival_date DATE,
+  departure_date DATE,
+  rating FLOAT UNSIGNED NOT NULL,
+  reviews TEXT NOT NULL,
+  created_at DATETIME DEFAULT NOW(),
+  PRIMARY KEY (user_id, hotel_id)
+);
+
+CREATE TABLE IF NOT EXISTS completed_reservations (
+  user_id INT UNSIGNED NOT NULL,
+  hotel_id INT UNSIGNED NOT NULL,
+  arrival_date DATE,
+  departure_date DATE,
+  cost INT UNSIGNED NOT NULL,
+  PRIMARY KEY (user_id, hotel_id)
+);
+
+CREATE TABLE IF NOT EXISTS hotel (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(150) NOT NULL UNIQUE,
+  adress VARCHAR(150) NOT NULL,
+  description VARCHAR(150) NOT NULL,
+  numbers_id INT UNSIGNED NOT NULL,
+  services_type_id INT UNSIGNED NOT NULL,
+  rating FLOAT UNSIGNED NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS numbers (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(150) NOT NULL,
+  bed VARCHAR(50) NOT NULL,
+  description VARCHAR(150) NOT NULL,
+  seats_in_the_room TINYINT UNSIGNED NOT NULL,
+  cost INT UNSIGNED NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS room_reservation (
+  user_id INT UNSIGNED NOT NULL,
+  numbers_id INT UNSIGNED NOT NULL,
+  arrival_date DATE,
+  departure_date DATE,
+  notes TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS services_type (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL UNIQUE,
+  cost INT UNSIGNED NOT NULL
+);
